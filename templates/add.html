@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    <button style="width:150", type="edit", onclick="location.href='/top_key'">Top keywords</button>
+    <form >
+        <p>
+            <label for="input_text">Insert text</label>
+        </p>
+        <p>
+            <textarea rows="20" cols="100" name="input_text">{% if text %}{{ text }}{% endif %}</textarea>
+        </p>
+	<p>
+        {% if table_json %}
+        <textarea hidden name="keywords">{{table_json}}</textarea>
+        {% endif %}
+        <button formaction="/add/find" formmethod="post">Find keywords</button>
+        <button formaction="/add/wiki" formmethod="post" {% if wiki_flag == False %} disabled {% endif %}>Wikipedia search</button>
+        <button formaction="/add/save" formmethod="post" {% if save_flag == False %} disabled {% endif %}>Save and exit</button>
+
+	</p>
+    </form>
+    {% if table %}
+    <table cellpadding="0" cellspacing="2" border="1">
+		  <tbody>
+          <tr>
+              {% for key in table[0].keys() %}
+				<th>{{ key }}</th>
+              {% endfor %}
+          </tr>
+		{% for line in table %}
+			<tr>
+				{% for key in line.keys() %}
+				<td>{{ line[key] }}</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+		  </tbody>
+		</table>
+    {% endif %}
+
+</body>
+</html>

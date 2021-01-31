@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All texts</title>
+</head>
+<body>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <button style="width:150", type="edit", onclick="location.href='/add'">Add new text</button>
+        {% if table %}
+    <table cellpadding="0" cellspacing="2" border="1">
+		  <tbody>
+          <tr>
+              {% for key in table[0].keys() %}
+				<th>{{ key }}</th>
+              {% endfor %}
+          </tr>
+		{% for line in table %}
+			<tr>
+				{% for key in line.keys() %}
+				<td>{{ line[key] }}</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+		  </tbody>
+		</table>
+    {% endif %}
+</body>
+</html>
