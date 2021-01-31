@@ -20,6 +20,5 @@ def summary(word) -> str:
 def list_summary(table) -> list:
     """Add to table of words information from wikipedia."""
     for line in table:
-        line['wiki'] = summary(line['word'])
+        line["wiki"] = summary(line["word"])
     return table
-

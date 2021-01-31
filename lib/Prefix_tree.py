@@ -4,17 +4,18 @@ import json
 
 class PrefixTree:
     """Prefix tree class with vectors methods and saving to file"""
+
     def __init__(self, init_dict={}, num=0, crop=0):
         """
         For empty prefix tree leave empty brackets.
         Can be initialized from saved file in dictionary representation.
         """
-        if init_dict.get('num') is not None:
-            self.num = init_dict.get('num')
-            self.mod_val = init_dict.get('mod')
+        if init_dict.get("num") is not None:
+            self.num = init_dict.get("num")
+            self.mod_val = init_dict.get("mod")
             self.mod_update = True
-            self.crop = init_dict.get('crop')
-            self.dictionary = self.SimpleDict(init_dict.get('dictionary'))
+            self.crop = init_dict.get("crop")
+            self.dictionary = self.SimpleDict(init_dict.get("dictionary"))
         else:
             self.dictionary = self.SimpleDict(init_dict)
             if num == 0:
@@ -22,7 +23,7 @@ class PrefixTree:
                     num += word["val"]
             self.num = num
             self.crop = crop
-            self.mod_val = math.sqrt(sum(w['val'] ** 2 for w in self.list()))
+            self.mod_val = math.sqrt(sum(w["val"] ** 2 for w in self.list()))
             self.mod_update = True
 
     class SimpleDict:
@@ -31,7 +32,7 @@ class PrefixTree:
         Simple node in prefix tree.
         """
 
-        def __init__(self, init_dict: dict ={}):
+        def __init__(self, init_dict: dict = {}):
             self.dictionary = {}
             for l in init_dict:
                 if l == "":
@@ -100,7 +101,7 @@ class PrefixTree:
             val = self.dictionary.get("")
 
             if val is not None:
-                list_data.append({'word': word, 'val': val})
+                list_data.append({"word": word, "val": val})
 
             for letter in self.dictionary:
                 if letter != "":
@@ -132,11 +133,11 @@ class PrefixTree:
     def mod(self, check=False) -> float:
         """Return module as if prefix tree is a vector"""
         if check:
-            self.mod_val = math.sqrt(sum(w['val'] ** 2 for w in self.list()))
+            self.mod_val = math.sqrt(sum(w["val"] ** 2 for w in self.list()))
             self.mod_update = True
         else:
             if not self.mod_update:
-                self.mod_val = math.sqrt(sum(w['val'] ** 2 for w in self.list()))
+                self.mod_val = math.sqrt(sum(w["val"] ** 2 for w in self.list()))
                 self.mod_update = True
 
         return self.mod_val
@@ -179,7 +180,7 @@ class PrefixTree:
 
         for letter in self.dictionary.keys():
             if letter == "":
-                list_data.append({'word': word, 'val': self.dictionary.get(letter)})
+                list_data.append({"word": word, "val": self.dictionary.get(letter)})
             else:
                 list_data.extend(self.dictionary.get(letter).list(letter))
 
@@ -190,11 +191,12 @@ class PrefixTree:
 
     def json(self) -> dict:
         """Return dictionary representation of all information in this prefix tree"""
-        data = {'num': self.num,
-                'mod': self.mod(),
-                'crop': self.crop,
-                'dictionary': self.dictionary.json()
-                }
+        data = {
+            "num": self.num,
+            "mod": self.mod(),
+            "crop": self.crop,
+            "dictionary": self.dictionary.json(),
+        }
         return data
 
     def save(self, path: str):
@@ -216,7 +218,7 @@ class PrefixTree:
             new_vector = PrefixTree()
 
             for word in self.list():
-                new_vector.value(word['word'], word['val'] / mod)
+                new_vector.value(word["word"], word["val"] / mod)
 
             new_vector.num = self.num
             new_vector.crop = self.crop
@@ -227,7 +229,7 @@ class PrefixTree:
         else:
 
             for word in self.list():
-                self.value(word['word'], word['val'] / mod)
+                self.value(word["word"], word["val"] / mod)
 
             self.mod_val = 1
 

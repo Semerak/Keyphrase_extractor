@@ -1,7 +1,7 @@
 def first_n_words(text: str, n=10):
     """Return first n words."""
     key_list = text.split(" ")[:n]
-    return [{'word': word} for word in key_list]
+    return [{"word": word} for word in key_list]
 
 
 def ngram_rank(text: str) -> list:

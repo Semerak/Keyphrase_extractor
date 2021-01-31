@@ -7,8 +7,8 @@ from nltk.corpus import stopwords
 def pre_proc_text(text: str) -> str:
     """Preprocess given text."""
     processed_article = text.lower()
-    processed_article = re.sub('[^a-zA-Z]', ' ', processed_article)
-    processed_article = re.sub(r'\s+', ' ', processed_article)
+    processed_article = re.sub("[^a-zA-Z]", " ", processed_article)
+    processed_article = re.sub(r"\s+", " ", processed_article)
     return processed_article
 
 
@@ -25,7 +25,7 @@ def delete_stop_words(all_words: list) -> list:
     bad_words = ["also", "th", "one", "two", "tree", "four", "five", "ten"]
 
     for i in range(len(all_words)):
-        all_words[i] = [w for w in all_words[i] if w not in stopwords.words('english')]
+        all_words[i] = [w for w in all_words[i] if w not in stopwords.words("english")]
         all_words[i] = [w for w in all_words[i] if w not in bad_words]
 
     return all_words

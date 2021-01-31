@@ -10,8 +10,8 @@ def list_top_keys() -> list:
     list_files = glob.glob(keypath() + "*.json")
     for file_path in list_files:
         table = []
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             table = json.loads(file.read())
         for line in table:
-            top.inc(line['word'])
+            top.inc(line["word"])
     return top.list(True)
