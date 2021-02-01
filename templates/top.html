@@ -9,13 +9,13 @@
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
-
-    <button style="width:150", type="edit", onclick="location.href='/add'">Add new text</button>
+    <p><button style="width:150", type="edit", onclick="location.href='/add'">Add new text</button></p>
+    <p>
     <form>
         <input type="text" hidden name="order", id="order" value="delete">
         <button formaction="/top_key/" formmethod="post">Delete all records</button>
     </form>
-
+    </p>
         {% if table %}
     <table cellpadding="0" cellspacing="2" border="1">
 		  <tbody>
