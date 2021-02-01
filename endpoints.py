@@ -3,8 +3,10 @@ from lib.keywords_extractor import keywords
 from lib.saving import save_new
 from lib import top_keys, wikipedia_search
 import json
-from app import blp
+from flask.blueprints import Blueprint
 
+
+blp = Blueprint("Main", __name__)
 
 @blp.route("/")
 @blp.route("/add/", methods=["post", "get"])

@@ -1,8 +1,9 @@
 import os
 from flask import Flask, request, render_template
 from flask.blueprints import Blueprint
+from endpoints import *
 
-blp = Blueprint("Main", __name__)
+
 
 
 def create_app():
