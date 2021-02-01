@@ -18,6 +18,7 @@ Download a zip file of the GloVe embedding vectors (http://nlp.stanford.edu/data
 5. Return the list of keyprases, which has a length < ```max_keys``` and the lowest-scored keyprase has a score > max_scored * ```alpha```. Parameters max_keys and alpha can be modified form front.
   
   ```max_keys``` - Maximum number of keywords
+  
   ```alpha``` - Coefficient for threshold value
   
 ### Light model 
