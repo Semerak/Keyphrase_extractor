@@ -12,7 +12,12 @@ def summary(word: str) -> str:
         result = "Disambiguation: " + ", ".join(wikipedia.search(word, results=4))
 
     except:
-        result = "No page"
+
+        try:
+            result = wikipedia.summary(word, chars=100, auto_suggest=True)
+
+        except:
+            result = "No page"
 
     return result
 
@@ -20,5 +25,5 @@ def summary(word: str) -> str:
 def list_summary(table) -> list:
     """Add to table of words information from wikipedia."""
     for line in table:
-        line["wiki"] = summary(line["word"])
+        line["wiki"] = summary(line["word"].replace("_", " "))
     return table

@@ -45,12 +45,10 @@ def extract_good_words(text: str) -> list:
     return good_words
 
 
-def ngram(
-    words: list, n: int = 1, ngram_dic: "PrefixTree" = PrefixTree()
-) -> "PrefixTree":
+def ngram(words: list, n: int = 1, ngram_dic: PrefixTree = PrefixTree()) -> PrefixTree:
     """Generate a PrefixTree with ngrams with given n."""
     window = []
-    inc_val = 2**(n-1)
+    inc_val = 2 ** (n - 1)
 
     for i in range(n - 1):
         window.insert(0, words[i])

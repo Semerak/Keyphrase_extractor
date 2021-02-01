@@ -1,3 +1,5 @@
+from flask import current_app
+
 from lib.prefix_tree import PrefixTree
 from nltk.corpus import stopwords
 
@@ -10,8 +12,7 @@ class StopWordsSingleton(object):
             cls.instance = super(StopWordsSingleton, cls).__new__(cls)
             for word in stopwords.words("english"):
                 cls.sw_list.value(word, True)
-            bad_words = ["also", "th", "one", "two", "tree", "four", "five", "ten"]
-            for word in bad_words:
+            for word in current_app.config["BAD_WORDS"]:
                 cls.sw_list.value(word, True)
         return cls.instance
 

@@ -1,14 +1,12 @@
-import os
-from flask import Flask, request, render_template
-from flask.blueprints import Blueprint
+import logging
+from config import Config
 from endpoints import *
-from lib.GloVe.embedding_vector import get_embedding_vector
 
 
 def create_app():
-    secret = os.urandom(32)
+    logging.basicConfig(level=logging.INFO)
     _app = Flask(__name__)
-    _app.config["SECRET_KEY"] = secret
+    _app.config.from_object(Config())
     _app.register_blueprint(blp)
     return _app
 

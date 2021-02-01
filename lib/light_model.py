@@ -3,7 +3,7 @@ from lib.prefix_tree import PrefixTree
 from lib.GloVe.embedding_vector import get_embedding_vector
 
 
-def light(source, target, dist_fun=distance.euclidean):
+def light(source, target, dist_fun=distance.euclidean) -> float:
     """Evaluating additional light."""
     source_pos, source_size = source[0], source[1]
     target_pos, target_size = target[0], target[1]
@@ -28,7 +28,7 @@ def get_dimensions(word: list):
 
         dim = dim + dim0
 
-    return (dim / len(words), word["val"])
+    return dim / len(words), word["val"]
 
 
 def light_model(dic, dict_fun=distance.euclidean):

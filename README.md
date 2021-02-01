@@ -2,9 +2,7 @@
 
 #### install dependencies
 
-```pip install nltk```
-
-```pip install wikipedia```
+```pip install -r requirements.txt```
 
 #### download additional files for light model (optionally)
 

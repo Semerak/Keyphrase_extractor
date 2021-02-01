@@ -1,17 +1,26 @@
-from lib.config_data import keypath
 import glob
 import json
+import os
+from flask import current_app
+
 from lib.prefix_tree import PrefixTree
 
 
 def list_top_keys() -> list:
     """Return list of top-used saved keywords"""
     top = PrefixTree()
-    list_files = glob.glob(keypath() + "*.json")
-    for file_path in list_files:
-        table = []
-        with open(file_path, "r", encoding="utf-8") as file:
-            table = json.loads(file.read())
-        for line in table:
-            top.inc(line["word"])
+
+    path = current_app.config["KEY_PATH"]
+    _, _, list_files = next(os.walk(path))
+
+    for file_name in list_files:
+        if ".json" in file_name:
+            table = []
+            file_path = os.path.join(path, file_name)
+
+            with open(file_path, "r", encoding="utf-8") as file:
+                table = json.loads(file.read())
+            for line in table:
+                top.inc(line["word"])
+
     return top.list(True)
