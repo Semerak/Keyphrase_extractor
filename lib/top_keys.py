@@ -1,7 +1,7 @@
 from lib.config_data import keypath
 import glob
 import json
-from lib.Prefix_tree import PrefixTree
+from lib.prefix_tree import PrefixTree
 
 
 def list_top_keys() -> list:

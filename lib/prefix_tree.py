@@ -3,7 +3,7 @@ import json
 
 
 class PrefixTree:
-    """Prefix tree class with vectors methods and saving to file"""
+    """Prefix tree class with vectors methods and saving to file."""
 
     def __init__(self, init_dict={}, num=0, crop=0):
         """
@@ -41,7 +41,7 @@ class PrefixTree:
                     self.dictionary[l] = PrefixTree.SimpleDict(init_dict[l])
 
         def keys(self):
-            """Return all children nodes' letters"""
+            """Return all children nodes' letters."""
             return self.dictionary.keys()
 
         def get(self, letter: str):
@@ -81,7 +81,7 @@ class PrefixTree:
                 self.dictionary[""] += val
 
         def value(self, val: object):
-            """Set value in this node"""
+            """Set value in this node."""
             self.dictionary[""] = val
 
         def clear(self, new_dic, word, val):
@@ -120,7 +120,7 @@ class PrefixTree:
             return json_dic
 
     def inc(self, word: str, val: float = 1):
-        """Increment value for given word"""
+        """Increment value for given word."""
         dic = self.dictionary
 
         for letter in word:
@@ -131,7 +131,7 @@ class PrefixTree:
         self.mod_update = False
 
     def mod(self, check=False) -> float:
-        """Return module as if prefix tree is a vector"""
+        """Return module as if prefix tree is a vector."""
         if check:
             self.mod_val = math.sqrt(sum(w["val"] ** 2 for w in self.list()))
             self.mod_update = True
@@ -143,7 +143,7 @@ class PrefixTree:
         return self.mod_val
 
     def value(self, word: str, val: object):
-        """Add new value to given word"""
+        """Add new value to given word."""
         dic = self.dictionary
 
         for letter in word:
@@ -153,7 +153,7 @@ class PrefixTree:
         self.mod_update = False
 
     def get(self, word: str) -> object:
-        """Return value by the word, or None if there is no such word"""
+        """Return value by the word, or None if there is no such word."""
         dic = self.dictionary
 
         for letter in word:
@@ -190,7 +190,7 @@ class PrefixTree:
         return list_data
 
     def json(self) -> dict:
-        """Return dictionary representation of all information in this prefix tree"""
+        """Return dictionary representation of all information in this prefix tree."""
         data = {
             "num": self.num,
             "mod": self.mod(),
@@ -200,7 +200,7 @@ class PrefixTree:
         return data
 
     def save(self, path: str):
-        """Save this object as json file with given path"""
+        """Save this object as json file with given path."""
         f = open(path, "w")
         f.write(json.dumps(self.json()))
         f.close()

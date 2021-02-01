@@ -5,8 +5,8 @@ from lib import top_keys, wikipedia_search
 import json
 from flask.blueprints import Blueprint
 
-
 blp = Blueprint("Main", __name__)
+
 
 @blp.route("/")
 @blp.route("/add/", methods=["post", "get"])

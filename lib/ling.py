@@ -1,4 +1,4 @@
-from lib.Prefix_tree import PrefixTree
+from lib.prefix_tree import PrefixTree
 import re
 import nltk
 from nltk.corpus import stopwords
