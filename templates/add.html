@@ -18,6 +18,18 @@
         {% if table_json %}
         <textarea hidden name="keywords">{{table_json}}</textarea>
         {% endif %}
+        <p>
+        <input type="checkbox" id="light" name="light"   {% if extractor_config and extractor_config["light_flag"] == True %} checked {% endif %}>
+        <label for="light">Light model (in first usage may take 2 min to load data from GloVe)</label>
+        </p>
+        <p>
+        <input type="text" id="max_keys" name="max_keys" size="10" {% if extractor_config and extractor_config["max_keys"] %} value="{{extractor_config['max_keys']}}" {% else %} value="10" {% endif %}>
+        <label for="max_keys">Maximum number of keywords</label>
+            </p>
+        <p>
+        <input type="text" id="alpha" name="alpha" size="10"  {% if extractor_config and extractor_config["alpha"] %} value="{{extractor_config['alpha']}}" {% else %} value="0.5" {% endif %}>
+        <label for="alpha">Coefficient for threshold value</label>
+        </p>
         <button formaction="/add/find" formmethod="post">Find keywords</button>
         <button formaction="/add/wiki" formmethod="post" {% if wiki_flag == False %} disabled {% endif %}>Wikipedia search</button>
         <button formaction="/add/save" formmethod="post" {% if save_flag == False %} disabled {% endif %}>Save and exit</button>

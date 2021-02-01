@@ -1,7 +1,8 @@
 from lib.prefix_tree import PrefixTree
 import re
 import nltk
-from nltk.corpus import stopwords
+from lib.stop_words import is_stop_word
+
 
 
 def pre_proc_text(text: str) -> str:
@@ -22,13 +23,11 @@ def tokenizer(text: str) -> list:
 
 def delete_stop_words(all_words: list) -> list:
     """From a list delete stop words."""
-    bad_words = ["also", "th", "one", "two", "tree", "four", "five", "ten"]
-
-    for i in range(len(all_words)):
-        all_words[i] = [w for w in all_words[i] if w not in stopwords.words("english")]
-        all_words[i] = [w for w in all_words[i] if w not in bad_words]
-
-    return all_words
+    good_words = []
+    for word in all_words:
+        if not(is_stop_word(word)):
+            good_words.append(word)
+    return good_words
 
 
 def extract_good_words(text: str) -> list:
@@ -37,14 +36,13 @@ def extract_good_words(text: str) -> list:
     Firstly do a preprocessing for text, then delete stop words.
     """
     proc_text = pre_proc_text(text)
-    all_words = tokenizer(proc_text)
+    all_words = tokenizer(proc_text)[0]
     good_words = delete_stop_words(all_words)
     return good_words
 
 
-def ngram(words: list, n: int = 1) -> "PrefixTree":
+def ngram(words: list, n: int = 1, ngram_dic : "PrefixTree" = PrefixTree()) -> "PrefixTree":
     """Generate a PrefixTree with ngrams with given n."""
-    ngram_dic = PrefixTree()
     window = []
     for i in range(n - 1):
         window.insert(0, words[i])

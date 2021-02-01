@@ -1,7 +1,7 @@
 import wikipedia
 
 
-def summary(word) -> str:
+def summary(word: str) -> str:
     """Return information about word from wikipedia."""
     result = ""
 
@@ -9,7 +9,7 @@ def summary(word) -> str:
         result = wikipedia.summary(word, chars=100, auto_suggest=False)
 
     except wikipedia.exceptions.DisambiguationError:
-        result = "Disambiguation: " + " ,".join(wikipedia.search(word, results=4))
+        result = "Disambiguation: " + ", ".join(wikipedia.search(word, results=4))
 
     except:
         result = "No page"

@@ -13,9 +13,11 @@ blp = Blueprint("Main", __name__)
 def add():
     """First enter to page add"""
     message = "Insert text"
-
+    extractor_config = {"light_flag": False,
+                        "max_keys": 10,
+                        "alpha": 0.5}
     return render_template(
-        "add.html", message=message, save_flag=False, wiki_flag=False
+        "add.html", message=message, save_flag=False, wiki_flag=False, extractor_config=extractor_config
     )
 
 
@@ -24,12 +26,17 @@ def add_find():
     """Extract keywords."""
     message = "You can make a wikipedia search for keywords (may take a while)."
     input_text = ""
-
+    extractor_config = {"light_flag": False,
+                        "max_keys": 10,
+                        "alpha": 0.5}
     if request.method == "POST":
         input_text = request.form.get("input_text")
+        extractor_config['light_flag'] = bool(request.form.get("light"))
+        extractor_config['max_keys'] = int(request.form.get("max_keys"))
+        extractor_config['alpha'] = float(request.form.get("alpha"))
 
     if input_text != "":
-        table = keywords(input_text)
+        table = keywords(input_text,extractor_config)
 
     return render_template(
         "add.html",
@@ -39,6 +46,7 @@ def add_find():
         text=input_text,
         table=table,
         table_json=json.dumps(table),
+        extractor_config=extractor_config
     )
 
 
@@ -67,10 +75,16 @@ def add_wiki():
     """Make wiki search."""
     input_text = ""
     keywords_raw = ""
+    extractor_config = {"light_flag": False,
+                        "max_keys": 10,
+                        "alpha": 0.5}
     table = []
 
     if request.method == "POST":
         input_text = request.form.get("input_text")
+        extractor_config['light_flag'] = bool(request.form.get("light"))
+        extractor_config['max_keys'] = int(request.form.get("max_keys"))
+        extractor_config['alpha'] = float(request.form.get("alpha"))
         keywords_raw = request.form.get("keywords")
         keywords_list = json.loads(keywords_raw)
         table = wikipedia_search.list_summary(keywords_list)
@@ -82,6 +96,7 @@ def add_wiki():
         text=input_text,
         table=table,
         table_json=json.dumps(table),
+        extractor_config=extractor_config
     )
 
 

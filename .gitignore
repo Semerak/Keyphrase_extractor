@@ -2,3 +2,4 @@
 /venv/
 /.pytest_cache/
 /data/test
+lib/GloVe/glove.6B.300d.txt

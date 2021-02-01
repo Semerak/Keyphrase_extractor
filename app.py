@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, render_template
 from flask.blueprints import Blueprint
 from endpoints import *
-
+from lib.GloVe.embedding_vector import get_embedding_vector
 
 
 
@@ -17,3 +17,4 @@ def create_app():
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True, port=80, host="127.0.0.1")
+    get_embedding_vector('a')
