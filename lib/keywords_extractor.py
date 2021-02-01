@@ -20,7 +20,7 @@ def ngram_rank(text: str, n: list = [1]) -> "PrefixTree":
 
 
 def evaluate_top(ranked: "PrefixTree", max_keys: int = 10, alpha: float = 0.5) -> list:
-    max_val = ranked.list(True)[0]['val']
+    max_val = ranked.list(True)[0]["val"]
     return ranked.clear(max_val * alpha).list(True)[:max_keys]
 
 
@@ -29,11 +29,13 @@ def keywords(text: str, extractor_config: dict) -> list:
     try:
         ranked = ngram_rank(text, [1, 2])
         try:
-            if extractor_config['light_flag']:
+            if extractor_config["light_flag"]:
                 ranked = light_model(ranked.clear(5))
         except Exception as e:
             print(e)
-        return evaluate_top(ranked, extractor_config['max_keys'], extractor_config['alpha'])
+        return evaluate_top(
+            ranked, extractor_config["max_keys"], extractor_config["alpha"]
+        )
 
     except Exception as e:  # if problem with libraries, return simply first 10 words
         print(e)

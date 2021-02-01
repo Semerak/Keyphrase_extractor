@@ -6,9 +6,9 @@ class StopWordsSingleton(object):
     sw_list = PrefixTree()
 
     def __new__(cls):
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(StopWordsSingleton, cls).__new__(cls)
-            for word in stopwords.words('english'):
+            for word in stopwords.words("english"):
                 cls.sw_list.value(word, True)
             bad_words = ["also", "th", "one", "two", "tree", "four", "five", "ten"]
             for word in bad_words:

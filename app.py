@@ -5,7 +5,6 @@ from endpoints import *
 from lib.GloVe.embedding_vector import get_embedding_vector
 
 
-
 def create_app():
     secret = os.urandom(32)
     _app = Flask(__name__)
@@ -16,5 +15,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True, port=80, host="127.0.0.1")
-    get_embedding_vector('a')
+    app.run(debug=False, port=80, host="127.0.0.1")
