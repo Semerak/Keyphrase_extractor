@@ -4,6 +4,7 @@ from lib.saving import save_new
 from lib import top_keys, wikipedia_search
 import json
 from flask.blueprints import Blueprint
+from lib.removing import delete_all_saves
 
 blp = Blueprint("Main", __name__)
 
@@ -100,8 +101,10 @@ def add_wiki():
     )
 
 
-@blp.route("/top_key/", methods=["get"])
+@blp.route("/top_key/", methods=["get","post"])
 def top_keys_page():
     """Make a list of top-used keywords."""
+    if request.method == "POST" and request.form.get('order') == "delete":
+        delete_all_saves()
     table = top_keys.list_top_keys()
     return render_template("top.html", table=table)
