@@ -1,4 +1,3 @@
-import glob
 import json
 import os
 from flask import current_app
